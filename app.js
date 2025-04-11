@@ -14,22 +14,22 @@ function createTechBackground() {
     window.addEventListener('resize', resizeCanvas);
 
     const nodes = [];
-    const nodeCount = 50; // Aumentado para mais nós
+    const nodeCount = 120; // Aumentado significativamente o número de nós
 
     // Criar nós
     for (let i = 0; i < nodeCount; i++) {
         nodes.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.8, // Velocidade aumentada
-            vy: (Math.random() - 0.5) * 0.8  // Velocidade aumentada
+            vx: (Math.random() - 0.5) * 0.6, // Velocidade ajustada para movimento mais suave
+            vy: (Math.random() - 0.5) * 0.6  // Velocidade ajustada para movimento mais suave
         });
     }
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'rgba(0, 64, 0, 0.2)'; // Verde mais escuro
-        ctx.strokeStyle = 'rgba(0, 100, 0, 0.4)'; // Linhas mais visíveis
+        ctx.fillStyle = 'rgba(0, 64, 0, 0.15)'; // Verde mais suave para os pontos
+        ctx.strokeStyle = 'rgba(0, 100, 0, 0.2)'; // Linhas mais suaves devido ao maior número
 
         // Atualizar posições dos nós
         nodes.forEach(node => {
@@ -40,7 +40,7 @@ function createTechBackground() {
             if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
 
             ctx.beginPath();
-            ctx.arc(node.x, node.y, 3, 0, Math.PI * 2); // Nós maiores
+            ctx.arc(node.x, node.y, 2, 0, Math.PI * 2); // Nós um pouco menores mas mais numerosos
             ctx.fill();
         });
 
@@ -51,7 +51,7 @@ function createTechBackground() {
                 const dy = node2.y - node1.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < 150) { // Distância aumentada
+                if (distance < 180) { // Distância aumentada para mais conexões
                     ctx.beginPath();
                     ctx.moveTo(node1.x, node1.y);
                     ctx.lineTo(node2.x, node2.y);
@@ -92,7 +92,7 @@ document.getElementById('imageInput').addEventListener('change', function(e) {
 
             const removeBtn = document.createElement('button');
             removeBtn.className = 'remove-btn';
-            removeBtn.innerHTML = '×'; // Usando o símbolo de multiplicação para um X mais elegante
+            removeBtn.innerHTML = '<span class="material-icons">delete</span>';
             removeBtn.setAttribute('title', 'Remover imagem');
             removeBtn.setAttribute('aria-label', 'Remover imagem');
             
@@ -259,12 +259,12 @@ async function generateImage() {
         sizeElement.textContent = `Tamanho do PNG gerado: ${actualSizeMB} MB`;
         sizeElement.className = 'file-size';
 
-        if (actualSizeBytes > 30 * 1024 * 1024) {
+        if (actualSizeBytes > 29.9 * 1024 * 1024) {
             sizeElement.classList.add('error');
-            sizeElement.textContent += ' \u26A0 Arquivo muito grande! Pode haver problemas no processamento.';
-        } else if (actualSizeBytes > 20 * 1024 * 1024) {
+            sizeElement.textContent += ' ⚠ Arquivo muito grande! Pode haver problemas no processamento.';
+        } else if (actualSizeBytes > 28.9 * 1024 * 1024) {
             sizeElement.classList.add('warning');
-            sizeElement.textContent += ' \u26A0 Arquivo grande, considere reduzir a quantidade de imagens.';
+            sizeElement.textContent += ' ⚠ Arquivo próximo do limite máximo!';
         } else {
             sizeElement.classList.add('success');
             sizeElement.textContent += ' \u2714 Tamanho ideal para processamento.';
@@ -289,8 +289,14 @@ async function generateImage() {
         downloadLink.style.display = 'inline-block';
         downloadLink.classList.add('download-button');
 
-        // Rolar até a prévia
-        finalPreview.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Mostrar mensagem de rolagem e não rolar automaticamente
+        const scrollMessage = document.getElementById('scrollMessage');
+        scrollMessage.style.display = 'block';
+        
+        // Esconder a mensagem após 5 segundos
+        setTimeout(() => {
+            scrollMessage.style.display = 'none';
+        }, 5000);
 
     } catch (error) {
         console.error('Erro ao gerar imagem:', error);

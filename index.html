@@ -2,24 +2,23 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Gerador de PNG de Imagens em Páginas A4</title>
+  <title>Gerador de Imagem PNG em Páginas A4</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
   <div class="tech-background" id="techBackground"></div>
   
   <div class="container">
     <img src="logo.png" alt="Logo da Empresa" class="logo">
-    <h1>Gerador de PNG com Páginas A4</h1>
+    <h1>Gerador de PNG Paginado em A4</h1>
 
     <div class="instructions">
-      <h2>Instruções:</h2>
       <ol>
-        <li>Selecione até 5 imagens para converter em páginas A4</li>
-        <li>Cada imagem será centralizada em uma página A4 separada</li>
-        <li>Digite o nome desejado para o arquivo final (sem a extensão .png)</li>
-        <li>Clique em "Gerar PNG" e aguarde o processamento</li>
-        <li>Visualize o resultado e faça o download se estiver satisfeito</li>
+        <li>Selecione até 5 imagens</li>
+        <li>Digite o nome do arquivo</li>
+        <li>Gere e baixe o PNG</li>
       </ol>
     </div>
 
@@ -42,7 +41,12 @@
       <span class="filename-extension">.png</span>
     </div>
     
-    <button onclick="generateImage()">Gerar PNG</button>
+    <div class="button-group">
+      <button onclick="generateImage()">Gerar PNG</button>
+      <a id="downloadLink" style="display: none;" download="saida.png" class="button">Baixar Imagem PNG</a>
+    </div>
+
+    <p id="scrollMessage" class="scroll-message" style="display: none;">Role a página para visualizar a imagem gerada</p>
 
     <div id="loader" class="loader">
       <div class="progress-container">
@@ -56,7 +60,7 @@
       <img id="finalPreview" class="preview-final" alt="Prévia do PNG gerado">
     </div>
 
-    <a id="downloadLink" style="display: none;" download="saida.png" class="button">Baixar Imagem PNG</a>
+
   </div>
 
   <script src="app.js"></script>
