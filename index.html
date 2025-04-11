@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de PNG de Imagens em Páginas A4</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="tech-background" id="techBackground"></div>
+  
+  <div class="container">
+    <img src="logo.png" alt="Logo da Empresa" class="logo">
+    <h1>Gerador de PNG com Páginas A4</h1>
+
+    <div class="instructions">
+      <h2>Instruções:</h2>
+      <ol>
+        <li>Selecione até 5 imagens para converter em páginas A4</li>
+        <li>Cada imagem será centralizada em uma página A4 separada</li>
+        <li>Digite o nome desejado para o arquivo final (sem a extensão .png)</li>
+        <li>Clique em "Gerar PNG" e aguarde o processamento</li>
+        <li>Visualize o resultado e faça o download se estiver satisfeito</li>
+      </ol>
+    </div>
+
+    <label class="custom-file-input">
+      Selecionar Imagens
+      <input type="file" id="imageInput" multiple accept="image/*" style="display: none;">
+    </label>
+
+    <div class="preview-container" id="preview"></div>
+    
+    <p id="sizeEstimate" style="font-weight: bold; margin-top: 1rem;"></p>
+    
+    <div class="filename-container">
+      <label for="filename">Nome do arquivo: <span class="required">*</span></label>
+      <input type="text" 
+             id="filename" 
+             class="filename-input" 
+             placeholder="Digite o nome do arquivo" 
+             required>
+      <span class="filename-extension">.png</span>
+    </div>
+    
+    <button onclick="generateImage()">Gerar PNG</button>
+
+    <div id="loader" class="loader">
+      <div class="progress-container">
+        <div class="progress-bar"></div>
+      </div>
+      <p class="progress-text">Preparando imagens...</p>
+    </div>
+
+    <div class="preview-section">
+      <h3 id="previewTitle" style="display: none;">Prévia do Arquivo Gerado:</h3>
+      <img id="finalPreview" class="preview-final" alt="Prévia do PNG gerado">
+    </div>
+
+    <a id="downloadLink" style="display: none;" download="saida.png" class="button">Baixar Imagem PNG</a>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
