@@ -188,7 +188,7 @@ async function generateImage() {
     const mmToInch = 1 / 25.4;
     const A4_WIDTH = Math.floor(210 * mmToInch * dpi); // A4 width in mm
     const A4_HEIGHT = Math.floor(297 * mmToInch * dpi); // A4 height in mm
-    const PAGE_SPACING = Math.floor(20 * mmToInch * dpi); // 20mm de espaço entre páginas
+    const PAGE_SPACING = Math.floor(5 * mmToInch * dpi); // 5mm de espaço entre páginas
 
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
